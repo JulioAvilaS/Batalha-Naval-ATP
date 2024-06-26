@@ -15,13 +15,22 @@ namespace ConsoleApp5
         //recebe o nome e o tamanho de embarcação
         public Embarcacao(string nome, int tamanho)
         {
-
+            this.nome = nome;
+            this.tamanho = tamanho;
         }
-
-        public void Propriedades()
+        public string Nome
         {
+            get {return this.nome;} 
+            set { this.nome = value;}   
 
         }
+        public int Tamanho
+        {
+            get { return this.tamanho;}
+            set { this.tamanho = value;}
+        }
+
+        
 
     }
 }
