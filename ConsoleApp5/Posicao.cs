@@ -8,10 +8,14 @@ namespace ConsoleApp5
 {
     internal class Posicao
     {
-
-        public void Propriedades()
+        private int linha;
+        private int coluna;
+        public Posicao(int linha, int coluna)
         {
-
+            this.linha = linha;
+            this.coluna = coluna;
+            
         }
+        
     }
 }
