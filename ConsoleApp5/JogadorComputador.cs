@@ -35,31 +35,56 @@ namespace ConsoleApp5
             }
             this.posTirosDados = new Posicao[100];
         }
-        public Posicao Propriedades()
-        {
-            //este método retornará a Posicao de um tiro (tipo de retorno do método: Posicao)..
-            //O programa deverá gerar aleatoriamente a posição de um tiro (Utilize o método Next da classe Random).
-            //O método deverá também, adicionar o tiro dado no vetor posTirosDados. Validações: Caso a posição gerada aleatoriamente esteja fora dos limites do tabuleiro
-            //ou já tenha sido utilizada anteriormente (verifique no vetor posTirosDados), o programa deverá gerar uma nova posição de disparo. 
-            return new Posicao();
-        }
-        public void GerarNickName(string nomeCompleto)
-        {
-            //este método deve receber o nome completo do jogador como parâmetro (parâmetro do método: string) e deve gerar o seu nickname.
-        }
+        
         public Posicao EscolherAtaque()
         {
-            //Validações: 1) Se for informada uma posição fora dos limites do tabuleiro,
-            //deverá ser solicitada uma nova posição de disparo. 2) Se for informada uma posição de disparo que já foi utilizada anteriormente
-            //(verifique no vetor posTirosDados), o programa deverá solicitar uma nova posição de disparo.
+            // este método retornará a Posicao de um tiro (tipo de retorno do método: Posicao).. O programa 
+            //deverá gerar aleatoriamente a posição de um tiro(Utilize o método Next da classe Random). O método deverá
+            //também, adicionar o tiro dado no vetor posTirosDados. Validações: Caso a posição gerada aleatoriamente esteja
+            //fora dos limites do tabuleiro ou já tenha sido utilizada anteriormente(verifique no vetor posTirosDados), o
+            //programa deverá gerar uma nova posição de disparo.
+            bool confirm = true;
+            int linha, coluna;
+            Posicao p = new Posicao(0,0);
+            while (confirm) 
+            { 
+                confirm = false;
+                Random l = new Random(10); 
+                Random c = new Random(10);
+                linha = l.Next();  coluna = c.Next();
+                p = new Posicao(linha, coluna);
+                for (int i = 0; i < posTirosDados.Length; i++)
+                {
+                    if ( p == posTirosDados[i])
+                    {
+                        confirm = true;
+                    }                  
+                } 
+            }
+            for (int i = 0; i < posTirosDados.Length; i++)
+            {
+                if (posTirosDados[i] == null)
+                {
+                    posTirosDados[i] = p;
+                    return p;
+                }
+            }
             return p;
         }
         public bool ReceberAtaque(Posicao p)
         {
             //este método receberá a Posicao de um tiro como parâmetro (parâmetro do método: Posicao).
             //Deve-se atualizar o tabuleiro com este tiro, caso alguma embarcação seja atingida o método retornará verdadeiro, caso contrário retornará falso.
-
-            return false;
+            if (tabuleiro[p.Linha, p.Coluna] == 'A')
+            {
+                tabuleiro[p.Linha, p.Coluna] = 'X';
+                return false;
+            }
+            else
+            {
+                tabuleiro[p.Linha, p.Coluna] = 'T';
+                return true;
+            }
         }
 
         public void ImprimirTabuleiroJogador()
@@ -97,13 +122,21 @@ namespace ConsoleApp5
             }
         }
 
-        public bool AdicionarEmbarcacao(Posicao p)
+        public void AdicionarEmbarcacao()
         {
-            //recebe como parâmetro uma Embarcacao e sua posição inicial (tipo Posicao).
-            //A Embarcacao deve ser adicionada no tabuleiro caso seja possível adicioná-la a partir da posição informada,
-            //isto é, a embarcação inteira deve caber no tabuleiro. Caso seja possível adicionar a embarcação,
-            //o método deverá retornar verdadeiro, caso contrário retornará falso (Não devem ser adicionadas duas embarcações na mesma posição).
-            return false;
+            //Deve ler o arquivo de texto e definir a posição de cada barco de acordo com este mesmo arquivo.
+
+
+        }
+        public int NumTirosDados
+        {
+            get { return numTirosDados; }
+            set { numTirosDados = value; }
+        }
+        public int Pontuacao
+        {
+            get { return pontuacao; }
+            set { pontuacao = value; }
         }
     }
 }
