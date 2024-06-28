@@ -39,7 +39,34 @@ namespace ConsoleApp5
         
         public void GerarNickName(string nomeCompleto)
         {
-            //este método deve receber o nome completo do jogador como parâmetro (parâmetro do método: string) e deve gerar o seu nickname.
+           string name,parte;
+string[] palavra;
+string usuario;
+string iniciais = "";
+char inicial;
+
+Console.WriteLine("Insira seu nome completo:");
+name = Console.ReadLine();
+name = name.ToUpper();
+
+palavra = name.Split(' ');
+
+           
+usuario = palavra[0];
+
+
+for (int i = 1; i < palavra.Length; i++)
+{
+    parte = palavra[i];
+    inicial = parte[0];
+    iniciais += inicial;
+}
+
+
+string nickname = usuario + iniciais;
+
+Console.WriteLine("Seu nickname é: " + nickname);
+ //este método deve receber o nome completo do jogador como parâmetro (parâmetro do método: string) e deve gerar o seu nickname.
 
         }
         public bool EscolherAtaque(Posicao p)
