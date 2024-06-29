@@ -27,9 +27,9 @@ namespace ConsoleApp5
 
             GerarNickName(nomeCompleto);
             this.tabuleiro = new char [linha, coluna];
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
                     tabuleiro[l, c] = 'A';
                 }
@@ -39,34 +39,7 @@ namespace ConsoleApp5
         
         public void GerarNickName(string nomeCompleto)
         {
-             string parte;
-  string[] palavra;
-  string usuario;
-  string iniciais = "";
-  char inicial;
-
-
- nomeCompleto = nomeCompleto.ToUpper();
-
-palavra = nomeCompleto.Split(' ');
-
-  
-     usuario = palavra[0];
-
-
-      for (int i = 1; i < palavra.Length; i++)
-    {
-     parte = palavra[i];
-     inicial = parte[0];
-     iniciais += inicial;
-    }
-
-
-         string nickname = usuario + iniciais;
-
-     Console.WriteLine("Seu nickname é: " + nickname);
-  
- //este método deve receber o nome completo do jogador como parâmetro (parâmetro do método: string) e deve gerar o seu nickname.
+            //este método deve receber o nome completo do jogador como parâmetro (parâmetro do método: string) e deve gerar o seu nickname.
 
         }
         public bool EscolherAtaque(Posicao p)
@@ -115,9 +88,9 @@ palavra = nomeCompleto.Split(' ');
 
         public void ImprimirTabuleiroJogador() {
             //imprime o tabuleiro para o jogador, mostrando inclusive o posicionamento de todas as embarcações
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
                     Console.Write(tabuleiro[l, c] + "\t");
                 }
@@ -129,11 +102,11 @@ palavra = nomeCompleto.Split(' ');
         {
             //imprime o tabuleiro para o adversário, isto é, não deve ser informado o
             //posicionamento das embarcações. 
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
-                    if (tabuleiro[l, c] != 'A' || tabuleiro[l, c] != 'X')
+                    if (tabuleiro[l, c] != 'A' && tabuleiro[l, c] != 'X')
                     {
                         Console.Write('T');
                     }
@@ -150,28 +123,30 @@ palavra = nomeCompleto.Split(' ');
 
         public bool AdicionarEmbarcacao(Embarcacao e, Posicao p)
         {
-            //recebe como parâmetro uma Embarcacao e sua posição inicial (tipo Posicao).
-            //A Embarcacao deve ser adicionada no tabuleiro caso seja possível adicioná-la a partir da posição informada,
-            //isto é, a embarcação inteira deve caber no tabuleiro. Caso seja possível adicionar a embarcação,
-            //o método deverá retornar verdadeiro, caso contrário retornará falso (Não devem ser adicionadas duas embarcações na mesma posição).
+            // Verifica se a embarcação cabe totalmente no tabuleiro a partir da posição p
+            if (p.Coluna + e.Tamanho > 10)  // Verifica se a embarcação ultrapassa as colunas do tabuleiro
+            {
+                return false;
+            }
+
+            // Verifica se há alguma outra embarcação já posicionada nas posições onde a nova embarcação será colocada
             for (int i = 0; i < e.Tamanho; i++)
             {
-                if ((p.Coluna += i) < 9)
-                {
-                    return false;
-                }
-                else if (tabuleiro[p.Linha, p.Coluna + i] != 'A')
+                if (tabuleiro[p.Linha, p.Coluna + i] != 'A')  // Verifica se a posição já está ocupada
                 {
                     return false;
                 }
             }
+
+            // Se passou pelas verificações, adiciona a embarcação ao tabuleiro
             for (int i = 0; i < e.Tamanho; i++)
             {
-                tabuleiro[p.Linha, p.Coluna + i] = e.Nome[0];
+                tabuleiro[p.Linha, p.Coluna + i] = e.Nome[0];  // Coloca a primeira letra do nome da embarcação
             }
 
             return true;
         }
+
         public string Nickname
         {
             get { return nickname; }

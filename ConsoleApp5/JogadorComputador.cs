@@ -26,9 +26,9 @@ namespace ConsoleApp5
 
             
             this.tabuleiro = new char[linha, coluna];
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
                     tabuleiro[l, c] = 'A';
                 }
@@ -90,9 +90,9 @@ namespace ConsoleApp5
         public void ImprimirTabuleiroJogador()
         {
             //imprime o tabuleiro para o jogador, mostrando inclusive o posicionamento de todas as embarcações
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
                     Console.Write(tabuleiro[l, c] + "\t");
                 }
@@ -104,11 +104,11 @@ namespace ConsoleApp5
         {
             //imprime o tabuleiro para o adversário, isto é, não deve ser informado o
             //posicionamento das embarcações.
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
-                    if (tabuleiro[l, c] != 'A' || tabuleiro[l, c] != 'X')
+                    if (tabuleiro[l, c] != 'A' && tabuleiro[l, c] != 'X')
                     {
                         Console.Write('T');
                     }
@@ -126,8 +126,12 @@ namespace ConsoleApp5
         {
             //Deve ler o arquivo de texto e definir a posição de cada barco de acordo com este mesmo arquivo.
 
+            //indexOf(';');
+            //lastIndexOf(';');
 
         }
+
+
         public int NumTirosDados
         {
             get { return numTirosDados; }
