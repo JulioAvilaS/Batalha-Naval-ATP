@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,32 +11,31 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
-            // Solicita o nome do jogador
-            Console.WriteLine("Olá, jogador! Para iniciar o jogo, primeiro informe o seu nome completo: \n");
+            
+            Console.WriteLine("Olá, jogador! Para iniciar o jogo, primeiro informe o seu nome completo:");
             string nomeCompleto = Console.ReadLine();
 
-            // Criação dos jogadores
-            JogadorHumano player = new JogadorHumano(10, 10, nomeCompleto); // Cria jogador humano
-            JogadorComputador maquina = new JogadorComputador(10, 10); // Cria jogador computador
+            
+            JogadorHumano player = new JogadorHumano(10, 10, nomeCompleto); 
+            JogadorComputador maquina = new JogadorComputador(10, 10); 
 
 
             maquina.AdicionarEmbarcacao();
-            maquina.ImprimirTabuleiroJogador();
 
-            // Loop para adicionar embarcações ao jogador humano
+            
                 for (int n = 0; n < 3; n++)
                 {
                     Console.WriteLine($"\nEscolha a posição do Submarino {n + 1}:");
-                    Console.WriteLine("\nInforme a linha:");
+                    Console.WriteLine("Informe a linha:");
                     int linha = int.Parse(Console.ReadLine());
-                    Console.WriteLine("\nInforme a coluna:");
+                    Console.WriteLine("Informe a coluna:");
                     int coluna = int.Parse(Console.ReadLine());
 
-                    // Criação da embarcação
-                    Embarcacao embarcacao = new Embarcacao("Submarino", 1); // Exemplo de embarcação com nome "Navio" e tamanho 1
+                    
+                    Embarcacao embarcacao = new Embarcacao("Submarino", 1); 
                     Posicao p = new Posicao(linha - 1, coluna - 1);
 
-                    // Adiciona a embarcação ao jogador humano
+                   
                     bool adicionado = player.AdicionarEmbarcacao(embarcacao, p);
                     if (adicionado)
                     {
@@ -44,25 +44,25 @@ namespace ConsoleApp5
                     else if (!adicionado)
                     {
                         Console.WriteLine("\nNão foi possível adicionar a embarcação. Tente novamente.");
-                        n--; // Decrementa para tentar adicionar a mesma embarcação novamente
+                        n--;
                     }
                 }
-                Console.WriteLine("\nSeu tabuleiro:");
+                Console.WriteLine("Seu tabuleiro:");
                 player.ImprimirTabuleiroJogador();
 
                 for (int n = 0; n < 2; n++)
                 {
                     Console.WriteLine($"\nEscolha a posição do Hidroavião {n + 1}:");
-                    Console.WriteLine("\nInforme a linha:");
+                    Console.WriteLine("Informe a linha:");
                     int linha = int.Parse(Console.ReadLine());
-                    Console.WriteLine("\nInforme a coluna:");
+                    Console.WriteLine("Informe a coluna:");
                     int coluna = int.Parse(Console.ReadLine());
 
-                    // Criação da embarcação
-                    Embarcacao embarcacao = new Embarcacao("Hidroavião", 2); // Exemplo de embarcação com nome "Navio" e tamanho 1
+                   
+                    Embarcacao embarcacao = new Embarcacao("Hidroavião", 2);
                     Posicao p = new Posicao(linha - 1, coluna - 1);
 
-                    // Adiciona a embarcação ao jogador humano
+                    
                     bool adicionado = player.AdicionarEmbarcacao(embarcacao, p);
                     if (adicionado)
                     {
@@ -71,25 +71,25 @@ namespace ConsoleApp5
                     else if (!adicionado)
                     {
                         Console.WriteLine("\nNão foi possível adicionar a embarcação. Tente novamente.");
-                        n--; // Decrementa para tentar adicionar a mesma embarcação novamente
+                        n--; 
                     }
 
                 }
-                Console.WriteLine("\nSeu tabuleiro:");
+                Console.WriteLine("Seu tabuleiro:");
                 player.ImprimirTabuleiroJogador();
                 for (int n = 0; n < 2; n++)
                 {
                     Console.WriteLine($"\nEscolha a posição do Cruzador {n + 1}:");
-                    Console.WriteLine("\nInforme a linha:");
+                    Console.WriteLine("Informe a linha:");
                     int linha = int.Parse(Console.ReadLine());
-                    Console.WriteLine("\nInforme a coluna:");
+                    Console.WriteLine("Informe a coluna:");
                     int coluna = int.Parse(Console.ReadLine());
 
-                    // Criação da embarcação
-                    Embarcacao embarcacao = new Embarcacao("Cruzador", 3); // Exemplo de embarcação com nome "Navio" e tamanho 1
+                    
+                    Embarcacao embarcacao = new Embarcacao("Cruzador", 3);
                     Posicao p = new Posicao(linha -1, coluna-1);
 
-                    // Adiciona a embarcação ao jogador humano
+                   
                     bool adicionado = player.AdicionarEmbarcacao(embarcacao, p);
                     if (adicionado)
                     {
@@ -98,25 +98,25 @@ namespace ConsoleApp5
                     else if (!adicionado)
                     {
                         Console.WriteLine("\nNão foi possível adicionar a embarcação. Tente novamente.");
-                        n--; // Decrementa para tentar adicionar a mesma embarcação novamente
+                        n--; 
                     }
 
                 }
-                Console.WriteLine("\nSeu tabuleiro:");
+                Console.WriteLine("Seu tabuleiro:");
                 player.ImprimirTabuleiroJogador();
                 for (int n = 0; n < 1; n++)
                 {
                     Console.WriteLine($"\nEscolha a posição do Encouraçado {n + 1}:");
-                    Console.WriteLine("\nInforme a linha:");
+                    Console.WriteLine("Informe a linha:");
                     int linha = int.Parse(Console.ReadLine());
-                    Console.WriteLine("\nInforme a coluna:");
+                    Console.WriteLine("Informe a coluna:");
                     int coluna = int.Parse(Console.ReadLine());
 
-                    // Criação da embarcação
-                    Embarcacao embarcacao = new Embarcacao("Encouraçado", 4); // Exemplo de embarcação com nome "Navio" e tamanho 1
+                    
+                    Embarcacao embarcacao = new Embarcacao("Encouraçado", 4); 
                     Posicao p = new Posicao(linha - 1, coluna - 1);
 
-                    // Adiciona a embarcação ao jogador humano
+                
                     bool adicionado = player.AdicionarEmbarcacao(embarcacao, p);
                     if (adicionado)
                     {
@@ -125,25 +125,25 @@ namespace ConsoleApp5
                     else if (!adicionado)
                     {
                         Console.WriteLine("\nNão foi possível adicionar a embarcação. Tente novamente.");
-                        n--; // Decrementa para tentar adicionar a mesma embarcação novamente
+                        n--; 
                     }
 
                 }
-                Console.WriteLine("\nSeu tabuleiro:");
+                Console.WriteLine("Seu tabuleiro:");
                 player.ImprimirTabuleiroJogador();
                 for (int n = 0; n < 1; n++)
                 {
                     Console.WriteLine($"\nEscolha a posição do Porta-aviões {n + 1}:");
-                    Console.WriteLine("\nInforme a linha:");
+                    Console.WriteLine("Informe a linha:");
                     int linha = int.Parse(Console.ReadLine());
-                    Console.WriteLine("\nInforme a coluna:");
+                    Console.WriteLine("Informe a coluna:");
                     int coluna = int.Parse(Console.ReadLine());
 
-                    // Criação da embarcação
-                    Embarcacao embarcacao = new Embarcacao("Porta-aviões", 5); // Exemplo de embarcação com nome "Navio" e tamanho 1
+                   
+                    Embarcacao embarcacao = new Embarcacao("Porta-aviões", 5);
                     Posicao p = new Posicao(linha - 1, coluna - 1);
 
-                    // Adiciona a embarcação ao jogador humano
+                   
                     bool adicionado = player.AdicionarEmbarcacao(embarcacao, p);
                     if (adicionado)
                     {
@@ -152,20 +152,20 @@ namespace ConsoleApp5
                     else if (!adicionado)
                     {
                         Console.WriteLine("\nNão foi possível adicionar a embarcação. Tente novamente.");
-                        n--; // Decrementa para tentar adicionar a mesma embarcação novamente
+                        n--; 
                     }
 
                 }
                 Console.WriteLine("Seu tabuleiro:");
                 player.ImprimirTabuleiroJogador();
 
-            //Jogo rodando
+           
             do {
 
 
                 bool acertou;
 
-                //loop de tiros jogador humano
+                
                 do
                 {
                     bool valid;
@@ -173,13 +173,13 @@ namespace ConsoleApp5
 
                     do
                     {
-                        Console.WriteLine("\nTabuleiro do jogador máquina:");
-                        maquina.ImprimirTabuleiroAdversario();
+                        
+                        
 
                         Console.WriteLine($"\nVez do jogador {player.Nickname}");
-                        Console.WriteLine("\nInforme a linha do tiro:");
+                        Console.WriteLine("Informe a linha do tiro:");
                         int linhaTiro = int.Parse(Console.ReadLine());
-                        Console.WriteLine("\nInforme a coluna do tiro:");
+                        Console.WriteLine("Informe a coluna do tiro:");
                         int colunaTiro = int.Parse(Console.ReadLine());
 
                         tiro = new Posicao(linhaTiro -1, colunaTiro -1);
@@ -192,7 +192,7 @@ namespace ConsoleApp5
 
                     } while (!valid);
 
-                    // Realiza o ataque do jogador humano
+                   
                     acertou = maquina.ReceberAtaque(tiro);
                     if (acertou)
                     {
@@ -204,27 +204,31 @@ namespace ConsoleApp5
                         Console.WriteLine("\nTiro na água.");
                     }
 
-                    player.NumTirosDados++;
+                    Console.WriteLine("Tabuleiro do jogador máquina atualizado com o último tiro");
+                    maquina.ImprimirTabuleiroAdversario();
 
-                    // Exibe tabuleiros após o tiro do jogador humano
+
                     
-                    
+
+
 
                 }
-                while (player.Pontuacao < 22 && acertou); // Exemplo de limite de 22 tiros
+                while (player.Pontuacao < 22 && acertou);
 
 
-                //loop de ataque do jogador maquina
-                do
+               
+                acertou = true;
+
+                while (maquina.Pontuacao < 22 && player.Pontuacao < 22 && acertou) 
                 {
-                    Console.WriteLine($"\nTabuleiro do jogador {player.Nickname}:");
-                    player.ImprimirTabuleiroAdversario();
+                    
+                    
 
-                    // Vez do jogador computador
+                   
                     Console.WriteLine("Vez do jogador computador: \n");
                     Posicao tiroComputador = maquina.EscolherAtaque();
 
-                    // Realiza o ataque do jogador computador
+                  
                     acertou = player.ReceberAtaque(tiroComputador);
                     if (acertou)
                     {
@@ -236,25 +240,63 @@ namespace ConsoleApp5
                         Console.WriteLine("Tiro do computador na água.");
                     }
 
-                    maquina.NumTirosDados++;
+                    Console.WriteLine($"\nTabuleiro do jogador {player.Nickname} atualizado com o ultimo tiro:");
+                    player.ImprimirTabuleiroAdversario();
 
-                    // Exibe tabuleiros após o tiro do jogador computador
-                    
+
+                   
+
                 }
-                while (maquina.Pontuacao < 22 && acertou);
+                
 
-            } while (maquina.Pontuacao < 22);
+            } while (maquina.Pontuacao < 22 && player.Pontuacao < 22);
 
             if (player.Pontuacao == 22)
             {
                 Console.WriteLine($"O jogador {player.Nickname} ganhou!!!");
+                try
+                {
+                    Console.WriteLine($"\nParabéns, {player.Nickname}! Você venceu o jogo de Batalha Naval!");
+
+                    StreamWriter sw = new StreamWriter("jogadas.txt", true, Encoding.UTF8);
+
+                   
+                    for (int i = 0; i < player.NumTirosDados; i++)
+                    {
+                        sw.WriteLine($"Tiro {i + 1}: ({player.PosTirosDados[i].Linha + 1}, {player.PosTirosDados[i].Coluna + 1})");
+                    }
+
+                    sw.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Exception: " + e.Message);
+                }
             }
             else if (maquina.Pontuacao == 22)
             {
                 Console.WriteLine($"O jogador computador ganhou!!!");
+                try
+                {
+                    Console.WriteLine($"\nParabéns, {player.Nickname}! Você venceu o jogo de Batalha Naval!");
+
+                    StreamWriter sw = new StreamWriter("jogadas.txt", true, Encoding.UTF8);
+
+                   
+                    for (int i = 0; i < player.NumTirosDados; i++)
+                    {
+                        sw.WriteLine($"Tiro {i + 1}: ({maquina.PosTirosDados[i].Linha + 1}, {maquina.PosTirosDados[i].Coluna + 1})");
+                    }
+
+                    sw.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Exception: " + e.Message);
+                }
             }
 
-            // Fim do jogo
+           
             Console.WriteLine("Fim do jogo!");
             Console.ReadLine();
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 
 namespace ConsoleApp5
 {
@@ -14,13 +15,12 @@ namespace ConsoleApp5
         private int pontuacao;
         private int numTirosDados;
         private Posicao[] posTirosDados;
+        private Random random;
         
 
         public JogadorComputador(int linha, int coluna)
         {
-            //o construtor deverá receber como parâmetro o número de linhas e colunas do tabuleiro do jogador. Todos os atributos devem ser inicializados: i)
-            //O tabuleiro deve ser instanciado e todas as posições devem receber o símbolo de água; ii) A pontuação deve iniciar com zero; iii)
-            //o número de tiros dados (numTirosDados) deve iniciar com zero, iv) o vetor com as posições dos tiros dados (posTirosDados) deve ser instanciado.
+           
 
             this.pontuacao = 0;
             this.numTirosDados = 0;
@@ -35,54 +35,45 @@ namespace ConsoleApp5
                 }
             }
             this.posTirosDados = new Posicao[100];
+            this.random = new Random();
         }
         
         public Posicao EscolherAtaque()
         {
-            // este método retornará a Posicao de um tiro (tipo de retorno do método: Posicao).. O programa 
-            //deverá gerar aleatoriamente a posição de um tiro(Utilize o método Next da classe Random). O método deverá
-            //também, adicionar o tiro dado no vetor posTirosDados. Validações: Caso a posição gerada aleatoriamente esteja
-            //fora dos limites do tabuleiro ou já tenha sido utilizada anteriormente(verifique no vetor posTirosDados), o
-            //programa deverá gerar uma nova posição de disparo.
-            bool confirm = true;
+            
+            bool confirm;
             int linha, coluna;
             Posicao p = new Posicao(0,0);
-            while (confirm) 
-            { 
+            do
+            {
                 confirm = false;
-                Random l = new Random(); 
-                Random c = new Random();
 
-                linha = l.Next(10); 
-                coluna = c.Next(10);
+                linha = random.Next(10);
+                coluna = random.Next(10);
 
                 p = new Posicao(linha, coluna);
 
                 for (int i = 0; i < posTirosDados.Length; i++)
                 {
-                    if ( p == posTirosDados[i])
+                    if (p.Linha == posTirosDados[i].Linha && p.Coluna == posTirosDados[i].Coluna)
                     {
                         confirm = true;
-                    }                  
-                } 
-            }
-            for (int i = 0; i < posTirosDados.Length; i++)
-            {
-                if (posTirosDados[i] == null)
-                {
-                    posTirosDados[i] = p;
-                    return p;
+                    }
                 }
-            }
+            } while (confirm);
+            numTirosDados++;
+            posTirosDados[numTirosDados] = p;
             return p;
         }
         public bool ReceberAtaque(Posicao p)
         {
-            //este método receberá a Posicao de um tiro como parâmetro (parâmetro do método: Posicao).
-            //Deve-se atualizar o tabuleiro com este tiro, caso alguma embarcação seja atingida o método retornará verdadeiro, caso contrário retornará falso.
             if (tabuleiro[p.Linha, p.Coluna] == 'A')
             {
                 tabuleiro[p.Linha, p.Coluna] = 'X';
+                return false;
+            }
+            else if (tabuleiro[p.Linha, p.Coluna] == 'X' || tabuleiro[p.Linha, p.Coluna] == 'T')
+            {
                 return false;
             }
             else
@@ -94,7 +85,7 @@ namespace ConsoleApp5
 
         public void ImprimirTabuleiroJogador()
         {
-            //imprime o tabuleiro para o jogador, mostrando inclusive o posicionamento de todas as embarcações
+           
             for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
                 for (int c = 0; c < tabuleiro.GetLength(1); c++)
@@ -107,8 +98,7 @@ namespace ConsoleApp5
 
         public void ImprimirTabuleiroAdversario()
         {
-            //imprime o tabuleiro para o adversário, isto é, não deve ser informado o
-            //posicionamento das embarcações.
+          
             for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
                 for (int c = 0; c < tabuleiro.GetLength(1); c++)
@@ -128,13 +118,8 @@ namespace ConsoleApp5
         }
 
             public void AdicionarEmbarcacao()
-        {
-            //Deve ler o arquivo de texto e definir a posição de cada barco de acordo com este mesmo arquivo.
-
-            //indexOf(';');
-            //lastIndexOf(';');
-            
-                // Lê o arquivo de texto e define a posição de cada barco de acordo com o arquivo
+            {
+              
                 StreamReader arq = new StreamReader("frotaComputador.txt", Encoding.UTF8);
 
                 string linha;
@@ -143,11 +128,11 @@ namespace ConsoleApp5
 
                 while (linha != null)
                 {
-                    // Encontra a posição dos pontos e vírgulas na linha
+                   
                     int primeiroP = linha.IndexOf(';');
                     int ultimoP = linha.LastIndexOf(';');
 
-                    // Extrai o nome da embarcação e suas coordenadas
+                   
                     string nome = linha.Substring(0, primeiroP);
                     int linhaInicial = int.Parse(linha.Substring(primeiroP + 1, ultimoP - primeiroP - 1));
                     int colunaInicial = int.Parse(linha.Substring(ultimoP + 1));
@@ -175,10 +160,10 @@ namespace ConsoleApp5
                         tamanho = 5;
                     }
 
-                    // Se passou pelas verificações, adiciona a embarcação ao tabuleiro
+                   
                     for (int i = 0; i < tamanho; i++)
                     {
-                        tabuleiro[linhaInicial, colunaInicial + i] = nome[0];  // Coloca a primeira letra do nome da embarcação
+                        tabuleiro[linhaInicial, colunaInicial + i] = nome[0]; 
                     }
 
                     linha = arq.ReadLine();
@@ -186,7 +171,8 @@ namespace ConsoleApp5
                 arq.Close();
             
 
-        }
+            }
+
 
 
         public int NumTirosDados
@@ -199,5 +185,12 @@ namespace ConsoleApp5
             get { return pontuacao; }
             set { pontuacao = value; }
         }
+        public Posicao[] PosTirosDados {
+            get {return posTirosDados;}
+            set {  posTirosDados = value;}
+
+        }
+
+
     }
 }

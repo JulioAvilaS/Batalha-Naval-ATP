@@ -12,7 +12,7 @@ namespace ConsoleApp5
         private int tamanho;
 
 
-        //recebe o nome e o tamanho de embarcação
+       
         public Embarcacao(string nome, int tamanho)
         {
             this.nome = nome;
