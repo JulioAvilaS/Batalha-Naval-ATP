@@ -1,0 +1,15 @@
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\bin\Debug\ConsoleApp5.exe.config
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\bin\Debug\ConsoleApp5.exe
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\bin\Debug\ConsoleApp5.pdb
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\Arquivo completo.csproj.AssemblyReference.cache
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\Arquivo completo.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\Arquivo completo.csproj.CoreCompileInputs.cache
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\ConsoleApp5.exe
+C:\Users\User\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\ConsoleApp5.pdb
+C:\Users\juliu\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\bin\Debug\ConsoleApp5.exe.config
+C:\Users\juliu\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\bin\Debug\ConsoleApp5.exe
+C:\Users\juliu\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\bin\Debug\ConsoleApp5.pdb
+C:\Users\juliu\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\Arquivo completo.csproj.AssemblyReference.cache
+C:\Users\juliu\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\Arquivo completo.csproj.CoreCompileInputs.cache
+C:\Users\juliu\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\ConsoleApp5.exe
+C:\Users\juliu\Downloads\Trabalho-final-ATP-rascunho\Trabalho-final-ATP-rascunho\ConsoleApp5\obj\Debug\ConsoleApp5.pdb

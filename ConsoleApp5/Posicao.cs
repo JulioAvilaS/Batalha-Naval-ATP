@@ -13,8 +13,17 @@ namespace ConsoleApp5
         public Posicao(int linha, int coluna)
         {
             this.linha = linha;
-            this.coluna = coluna;
-            
+            this.coluna = coluna;      
+        }
+        public int Linha
+        {
+            get { return linha; }
+            set { linha = value; }
+        }
+        public int Coluna
+        {
+            get { return coluna; }
+            set { coluna = value; }
         }
         
     }
