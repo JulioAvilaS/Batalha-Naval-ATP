@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ConsoleApp5
 {
@@ -26,9 +27,9 @@ namespace ConsoleApp5
 
             
             this.tabuleiro = new char[linha, coluna];
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
                     tabuleiro[l, c] = 'A';
                 }
@@ -49,10 +50,14 @@ namespace ConsoleApp5
             while (confirm) 
             { 
                 confirm = false;
-                Random l = new Random(10); 
-                Random c = new Random(10);
-                linha = l.Next();  coluna = c.Next();
+                Random l = new Random(); 
+                Random c = new Random();
+
+                linha = l.Next(10); 
+                coluna = c.Next(10);
+
                 p = new Posicao(linha, coluna);
+
                 for (int i = 0; i < posTirosDados.Length; i++)
                 {
                     if ( p == posTirosDados[i])
@@ -90,9 +95,9 @@ namespace ConsoleApp5
         public void ImprimirTabuleiroJogador()
         {
             //imprime o tabuleiro para o jogador, mostrando inclusive o posicionamento de todas as embarcações
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
                     Console.Write(tabuleiro[l, c] + "\t");
                 }
@@ -104,17 +109,17 @@ namespace ConsoleApp5
         {
             //imprime o tabuleiro para o adversário, isto é, não deve ser informado o
             //posicionamento das embarcações.
-            for (int l = 0; l > tabuleiro.GetLength(0); l++)
+            for (int l = 0; l < tabuleiro.GetLength(0); l++)
             {
-                for (int c = 0; c > tabuleiro.GetLength(1); c++)
+                for (int c = 0; c < tabuleiro.GetLength(1); c++)
                 {
-                    if (tabuleiro[l, c] != 'A' || tabuleiro[l, c] != 'X')
+                    if (tabuleiro[l, c] != 'X' && tabuleiro[l, c] != 'A' && tabuleiro[l, c] != 'T')
                     {
-                        Console.Write('T');
+                        Console.Write("A");
                     }
                     else
                     {
-                        Console.Write(tabuleiro[l, c] );
+                        Console.Write(tabuleiro[l, c]);
                     }
                     Console.Write("\t");
                 }
@@ -122,12 +127,68 @@ namespace ConsoleApp5
             }
         }
 
-        public void AdicionarEmbarcacao()
+            public void AdicionarEmbarcacao()
         {
             //Deve ler o arquivo de texto e definir a posição de cada barco de acordo com este mesmo arquivo.
 
+            //indexOf(';');
+            //lastIndexOf(';');
+            
+                // Lê o arquivo de texto e define a posição de cada barco de acordo com o arquivo
+                StreamReader arq = new StreamReader("frotaComputador.txt", Encoding.UTF8);
+
+                string linha;
+
+                linha = arq.ReadLine();
+
+                while (linha != null)
+                {
+                    // Encontra a posição dos pontos e vírgulas na linha
+                    int primeiroP = linha.IndexOf(';');
+                    int ultimoP = linha.LastIndexOf(';');
+
+                    // Extrai o nome da embarcação e suas coordenadas
+                    string nome = linha.Substring(0, primeiroP);
+                    int linhaInicial = int.Parse(linha.Substring(primeiroP + 1, ultimoP - primeiroP - 1));
+                    int colunaInicial = int.Parse(linha.Substring(ultimoP + 1));
+
+                    int tamanho = 0;
+
+                    if (nome == "Submarino")
+                    {
+                        tamanho = 1;
+                    }
+                    else if (nome == "Hidroavião")
+                    {
+                        tamanho = 2;
+                    }
+                    else if (nome == "Cruzador")
+                    {
+                        tamanho = 3;
+                    }
+                    else if (nome == "Encouraçado")
+                    {
+                        tamanho = 4;
+                    }
+                    else if (nome == "Porta-aviões")
+                    {
+                        tamanho = 5;
+                    }
+
+                    // Se passou pelas verificações, adiciona a embarcação ao tabuleiro
+                    for (int i = 0; i < tamanho; i++)
+                    {
+                        tabuleiro[linhaInicial, colunaInicial + i] = nome[0];  // Coloca a primeira letra do nome da embarcação
+                    }
+
+                    linha = arq.ReadLine();
+                }
+                arq.Close();
+            
 
         }
+
+
         public int NumTirosDados
         {
             get { return numTirosDados; }
