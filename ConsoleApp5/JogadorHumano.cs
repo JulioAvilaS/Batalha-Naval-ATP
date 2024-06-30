@@ -72,24 +72,18 @@ namespace ConsoleApp5
             //Validações: 1) Se for informada uma posição fora dos limites do tabuleiro,
             //deverá ser solicitada uma nova posição de disparo. 2) Se for informada uma posição de disparo que já foi utilizada anteriormente
             //(verifique no vetor posTirosDados), o programa deverá solicitar uma nova posição de disparo.
-            if(p.Linha < 0 || p.Linha >100 || p.Coluna < 0 || p.Coluna > 100)
+            if(p.Linha < 0 || p.Linha >= 10 || p.Coluna < 0 || p.Coluna >= 10)
             {
                 return false;
             }
-            for (int i = 0; i < posTirosDados.Length; i++)
+            for (int i = 0; i < numTirosDados; i++)
             {
-                if (p == posTirosDados[i])
+                if (posTirosDados[i].Linha == p.Linha && posTirosDados[i].Coluna == p.Coluna)
                 {
                     return false;
                 }
             }
-            for (int i = 0; i < posTirosDados.Length; i++)
-            {
-                if (posTirosDados[i] == null)
-                {
-                    posTirosDados[i] = p;
-                }
-            }
+            posTirosDados[numTirosDados] = p;
             numTirosDados++;
             return true;
             
@@ -101,6 +95,10 @@ namespace ConsoleApp5
             if (tabuleiro[p.Linha, p.Coluna] == 'A')
             {
                 tabuleiro[p.Linha, p.Coluna] = 'X';
+                return false;
+            }
+            else if (tabuleiro[p.Linha, p.Coluna] == 'X' || tabuleiro[p.Linha, p.Coluna] == 'T')
+            {
                 return false;
             }
             else
@@ -186,6 +184,12 @@ namespace ConsoleApp5
         {
             get { return pontuacao; }
             set { pontuacao = value; }
+        }
+        public Posicao[] PosTirosDados
+        {
+            get { return posTirosDados; }
+            set { posTirosDados = value; }
+
         }
 
 

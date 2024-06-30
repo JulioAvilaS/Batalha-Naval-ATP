@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 
 namespace ConsoleApp5
 {
@@ -14,6 +15,7 @@ namespace ConsoleApp5
         private int pontuacao;
         private int numTirosDados;
         private Posicao[] posTirosDados;
+        private Random random;
         
 
         public JogadorComputador(int linha, int coluna)
@@ -35,6 +37,7 @@ namespace ConsoleApp5
                 }
             }
             this.posTirosDados = new Posicao[100];
+            this.random = new Random();
         }
         
         public Posicao EscolherAtaque()
@@ -44,36 +47,28 @@ namespace ConsoleApp5
             //também, adicionar o tiro dado no vetor posTirosDados. Validações: Caso a posição gerada aleatoriamente esteja
             //fora dos limites do tabuleiro ou já tenha sido utilizada anteriormente(verifique no vetor posTirosDados), o
             //programa deverá gerar uma nova posição de disparo.
-            bool confirm = true;
+            bool confirm;
             int linha, coluna;
             Posicao p = new Posicao(0,0);
-            while (confirm) 
-            { 
+            do
+            {
                 confirm = false;
-                Random l = new Random(); 
-                Random c = new Random();
 
-                linha = l.Next(10); 
-                coluna = c.Next(10);
+                linha = random.Next(10);
+                coluna = random.Next(10);
 
                 p = new Posicao(linha, coluna);
 
                 for (int i = 0; i < posTirosDados.Length; i++)
                 {
-                    if ( p == posTirosDados[i])
+                    if (p.Linha == posTirosDados[i].Linha && p.Coluna == posTirosDados[i].Coluna)
                     {
                         confirm = true;
-                    }                  
-                } 
-            }
-            for (int i = 0; i < posTirosDados.Length; i++)
-            {
-                if (posTirosDados[i] == null)
-                {
-                    posTirosDados[i] = p;
-                    return p;
+                    }
                 }
-            }
+            } while (confirm);
+            numTirosDados++;
+            posTirosDados[numTirosDados] = p;
             return p;
         }
         public bool ReceberAtaque(Posicao p)
@@ -83,6 +78,10 @@ namespace ConsoleApp5
             if (tabuleiro[p.Linha, p.Coluna] == 'A')
             {
                 tabuleiro[p.Linha, p.Coluna] = 'X';
+                return false;
+            }
+            else if (tabuleiro[p.Linha, p.Coluna] == 'X' || tabuleiro[p.Linha, p.Coluna] == 'T')
+            {
                 return false;
             }
             else
@@ -128,11 +127,11 @@ namespace ConsoleApp5
         }
 
             public void AdicionarEmbarcacao()
-        {
-            //Deve ler o arquivo de texto e definir a posição de cada barco de acordo com este mesmo arquivo.
+            {
+              //Deve ler o arquivo de texto e definir a posição de cada barco de acordo com este mesmo arquivo.
 
-            //indexOf(';');
-            //lastIndexOf(';');
+              //indexOf(';');
+              //lastIndexOf(';');
             
                 // Lê o arquivo de texto e define a posição de cada barco de acordo com o arquivo
                 StreamReader arq = new StreamReader("frotaComputador.txt", Encoding.UTF8);
@@ -186,7 +185,8 @@ namespace ConsoleApp5
                 arq.Close();
             
 
-        }
+            }
+
 
 
         public int NumTirosDados
@@ -199,5 +199,12 @@ namespace ConsoleApp5
             get { return pontuacao; }
             set { pontuacao = value; }
         }
+        public Posicao[] PosTirosDados {
+            get {return posTirosDados;}
+            set {  posTirosDados = value;}
+
+        }
+
+
     }
 }
